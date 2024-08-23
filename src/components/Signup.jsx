@@ -70,7 +70,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your name"
+                    placeholder="Masukkan Nama"
                     required
                   />
                 </div>
@@ -87,7 +87,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your email"
+                    placeholder="Masukkan Email"
                     required
                   />
                 </div>
@@ -104,7 +104,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your password"
+                    placeholder="Masukkan Password"
                     required
                   />
                 </div>
@@ -121,7 +121,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your phone number"
+                    placeholder="Masukkan Nomor Telepon"
                     required
                   />
                 </div>
@@ -135,7 +135,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
               </button>
             </form>
             <p className="mt-4 text-sm text-center text-muted-foreground">
-              Already have an account?{' '}
+              Sudah punya akun?{' '}
               <button onClick={onSwitchToLogin} className="text-primary hover:underline">
                 Log in
               </button>

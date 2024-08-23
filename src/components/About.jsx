@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 
+
 export default function About() {
   return (
     <section id="about" className="py-12 sm:py-16 md:py-24 min-h-screen flex items-center bg-gradient-to-b from-background to-secondary">

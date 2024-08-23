@@ -71,7 +71,7 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your email"
+                    placeholder="Masukkan Email"
                     required
                   />
                 </div>
@@ -88,7 +88,7 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-10 pr-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your password"
+                    placeholder="Masukkan Password"
                     required
                   />
                 </div>
@@ -104,7 +104,7 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
             <p className="mt-4 text-sm text-center text-muted-foreground">
               Belum punya akun?{' '}
               <button onClick={onSwitchToSignup} className="text-primary hover:underline">
-                Daftar
+                Sign Up
               </button>
             </p>
           </motion.div>
