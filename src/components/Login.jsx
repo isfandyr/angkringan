@@ -16,7 +16,6 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
 
-      // Fetch user data to check if they're an admin
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('is_admin')
@@ -25,9 +24,14 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
 
       if (userError) throw userError;
 
-      toast.success('Login successful!');
+      toast.success('Login Berhasil');
       onLoginSuccess(userData.is_admin);
       onClose();
+      
+      // Arahkan admin ke dashboard
+      if (userData.is_admin) {
+        window.location.href = '/admin'; // Gunakan navigasi browser untuk full reload
+      }
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -98,7 +102,7 @@ const Login = ({ isOpen, onClose, onSwitchToSignup, onLoginSuccess }) => {
                 className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition duration-300 flex items-center justify-center"
                 disabled={loading}
               >
-                {loading ? 'Logging in...' : 'Login'}
+                {loading ? 'Login...' : 'Login'}
               </button>
             </form>
             <p className="mt-4 text-sm text-center text-muted-foreground">

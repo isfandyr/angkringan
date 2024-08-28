@@ -15,18 +15,30 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
+      // Daftar pengguna baru
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            name,
-            phone_number: phoneNumber,
-          },
-        },
       });
-      if (error) throw error;
-      toast.success('Signup successful! Please check your email to verify your account.');
+
+      if (authError) throw authError;
+
+      // Jika pendaftaran berhasil, tambahkan data ke tabel profile
+      if (authData && authData.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([
+            {
+              id: authData.user.id,
+              name,
+              phone_number: phoneNumber,
+            },
+          ]);
+
+        if (profileError) throw profileError;
+      }
+
+      toast.success('Pendaftaran berhasil! Silakan periksa email Anda untuk verifikasi akun.');
       onClose();
     } catch (error) {
       toast.error(error.message);
@@ -53,14 +65,14 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-primary">Sign Up</h2>
+              <h2 className="text-2xl font-bold text-primary">Daftar</h2>
               <button onClick={onClose} className="text-muted-foreground hover:text-primary">
                 <FiX size={24} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
-                  Name
+                  Nama
                 </label>
                 <div className="relative">
                   <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
@@ -111,7 +123,7 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
               </div>
               <div>
                 <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground mb-1">
-                  Phone Number
+                  Nomor Telepon
                 </label>
                 <div className="relative">
                   <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
@@ -131,13 +143,13 @@ const Signup = ({ isOpen, onClose, onSwitchToLogin }) => {
                 className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition duration-300 flex items-center justify-center"
                 disabled={loading}
               >
-                {loading ? 'Signing up...' : 'Sign Up'}
+                {loading ? 'Mendaftar...' : 'Daftar'}
               </button>
             </form>
             <p className="mt-4 text-sm text-center text-muted-foreground">
               Sudah punya akun?{' '}
               <button onClick={onSwitchToLogin} className="text-primary hover:underline">
-                Log in
+                Login
               </button>
             </p>
           </motion.div>
